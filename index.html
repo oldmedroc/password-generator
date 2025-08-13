@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Strong Password Generator</title>
+    <meta name="description" content="Generate secure random passwords instantly. Customize length and characters for strong security.">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #06b6d4;
+            --blue: #3b82f6;
+            --lightgray: #cbd5e1;
+            --gradient: linear-gradient(to right, var(--teal), var(--blue));
+        }
+
+        body {
+            background-image: var(--gradient);
+            font-family: "Lexend", sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 30px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            color: var(--blue);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p.intro {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        #generator {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid var(--lightgray);
+            border-radius: 10px;
+            width: 100px;
+        }
+
+        input[type="checkbox"] {
+            accent-color: var(--blue);
+            margin-right: 5px;
+        }
+
+        button {
+            background-image: var(--gradient);
+            border: none;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: var(--blue);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #passwords {
+            display: grid;
+            gap: 10px;
+        }
+
+        .password {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .password span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .password button {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .tips-section, .history-section {
+            margin-top: 3rem;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 15px;
+        }
+
+        .tips-section h2, .history-section h2 {
+            color: var(--teal);
+            font-size: 1.8rem;
+        }
+
+        .tips-section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .tips-section li {
+            margin-bottom: 10px;
+        }
+
+        .history-section p {
+            margin-bottom: 15px;
+        }
+
+        .history-section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .history-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Ad spaces: These empty divs provide structural space where Auto Ads can be placed dynamically */
+        .ad-space {
+            min-height: 100px; /* Adjust based on typical ad sizes */
+            margin: 20px 0;
+            background: #eee; /* Placeholder background for visibility during development */
+            border-radius: 10px;
+        }
+
+        .top-ad { height: 90px; } /* e.g., for banner ad */
+        .side-ad { float: right; width: 160px; height: 600px; margin-left: 20px; } /* e.g., for skyscraper ad */
+        .in-content-ad { height: 250px; } /* e.g., for medium rectangle */
+        .bottom-ad { height: 90px; } /* e.g., for footer banner */
+
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            .side-ad { float: none; width: 100%; height: 250px; margin: 20px 0; }
+        }
+
+    </style>
+    <!-- AdSense Auto Ads Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-ADSENSE-ID" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Top ad space -->
+        <div class="ad-space top-ad"></div>
+
+        <header>
+            <h1>Random Strong Password Generator</h1>
+            <p class="intro">Create secure, customizable passwords in seconds to protect your online accounts. Stay safe with strong, unique passwords!</p>
+        </header>
+
+        <!-- Side ad space (for wider screens) -->
+        <div class="ad-space side-ad"></div>
+
+        <div id="generator">
+            <label>Password Length: <input type="number" id="length" value="12" min="8" max="50"></label>
+            <label><input type="checkbox" id="uppercase" checked> Include Uppercase Letters</label>
+            <label><input type="checkbox" id="numbers" checked> Include Numbers</label>
+            <label><input type="checkbox" id="symbols" checked> Include Symbols</label>
+            <button onclick="generatePasswords()">Generate 5 Passwords</button>
+        </div>
+
+        <div id="passwords"></div>
+
+        <!-- In-content ad space -->
+        <div class="ad-space in-content-ad"></div>
+
+        <section class="tips-section">
+            <h2>Password Security Tips</h2>
+            <ul>
+                <li>Use at least 12 characters for better security.</li>
+                <li>Include a mix of uppercase, lowercase, numbers, and symbols.</li>
+                <li>Avoid using personal information or common words.</li>
+                <li>Use a unique password for each account.</li>
+                <li>Consider using a password manager to store them safely.</li>
+            </ul>
+        </section>
+
+        <!-- New section to fill bottom left space -->
+        <section class="history-section">
+            <h2>History and Fun Facts About Passwords</h2>
+            <p>Passwords have a fascinating history that dates back thousands of years. While we associate them with modern computing, their roots lie in ancient civilizations. For instance, in ancient Rome, soldiers used "watchwords" to identify allies during night patrols. Similarly, the Polybius square from ancient Greece was an early encryption method that could be seen as a precursor to password systems.</p>
+            <img src="https://source.unsplash.com/random/400x200/?ancient-rome" alt="Ancient Roman soldiers" />
+            <p>In the world of computing, the first digital password was invented in 1961 by Fernando Corbató at MIT. He developed it for the Compatible Time-Sharing System (CTSS) to allow multiple users to access a shared computer while keeping their files private. This simple innovation solved a practical problem but unknowingly set the stage for today's cybersecurity challenges.</p>
+            <p>By the 1970s, passwords evolved with the introduction of hashing by Robert Morris in Unix systems in 1972. Hashing encrypts passwords so they're not stored in plain text, making them harder to steal. Fast forward to the 1990s and 2000s, and passwords became ubiquitous with the rise of the internet, leading to the development of password managers and multi-factor authentication (MFA) to combat increasing cyber threats.</p>
+            <img src="https://source.unsplash.com/random/400x200/?computer-history" alt="Vintage computer" />
+            <h3>Funny Facts About Passwords</h3>
+            <ul>
+                <li>The most common password worldwide is still "123456", followed closely by "password" – despite years of warnings!</li>
+                <li>On average, people manage around 100 passwords in their daily lives, leading to widespread "password fatigue".</li>
+                <li>In the movie WarGames (1983), the password to access a military supercomputer was "Joshua", the name of the programmer's son – a classic example of a weak personal password.</li>
+                <li>A simple 8-character password can be cracked in under an hour by modern brute-force attacks, but adding complexity makes it take centuries.</li>
+                <li>In Spaceballs (1987), the air shield password is "12345" – hilariously, the same as the president's luggage combination!</li>
+                <li>Bill Gates predicted the death of passwords in 2004, yet here we are in 2025, still using them alongside biometrics and MFA.</li>
+            </ul>
+            <p>Today, with advancements in AI and quantum computing, the future of passwords may involve passkeys or passwordless authentication. But for now, generating strong, unique passwords remains a key defense against hackers.</p>
+            <img src="https://source.unsplash.com/random/400x200/?cybersecurity" alt="Cybersecurity lock" />
+        </section>
+
+        <!-- Bottom ad space -->
+        <div class="ad-space bottom-ad"></div>
+
+        <footer>
+            &copy; 2025 Random Strong Password Generator. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        function generatePasswords() {
+            const length = parseInt(document.getElementById('length').value);
+            const includeUpper = document.getElementById('uppercase').checked;
+            const includeNums = document.getElementById('numbers').checked;
+            const includeSyms = document.getElementById('symbols').checked;
+
+            let chars = 'abcdefghijklmnopqrstuvwxyz';
+            if (includeUpper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (includeNums) chars += '0123456789';
+            if (includeSyms) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+            const passwordsDiv = document.getElementById('passwords');
+            passwordsDiv.innerHTML = '';
+
+            for (let i = 0; i < 5; i++) {
+                let password = '';
+                for (let j = 0; j < length; j++) {
+                    password += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                const strength = calculateStrength(password);
+                const pwElement = document.createElement('div');
+                pwElement.className = 'password';
+                pwElement.innerHTML = `${password} <span>Strength: ${strength}</span> <button onclick="copyToClipboard('${password}')">Copy</button>`;
+                passwordsDiv.appendChild(pwElement);
+            }
+        }
+
+        function calculateStrength(pw) {
+            let score = 0;
+            if (pw.length > 12) score++;
+            if (/[A-Z]/.test(pw)) score++;
+            if (/\d/.test(pw)) score++;
+            if (/[^A-Za-z0-9]/.test(pw)) score++;
+            return ['Weak', 'Medium', 'Strong', 'Very Strong'][score];
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+        }
+    </script>
+</body>
+</html>
