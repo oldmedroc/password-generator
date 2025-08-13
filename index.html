@@ -201,7 +201,7 @@
             <label><input type="checkbox" id="uppercase" checked> Include Uppercase Letters</label>
             <label><input type="checkbox" id="numbers" checked> Include Numbers</label>
             <label><input type="checkbox" id="symbols" checked> Include Symbols</label>
-            <button onclick="generatePasswords()">Generate 5 Passwords</button>
+            <button onclick="a()">Generate 5 Passwords</button>
         </div>
 
         <div id="passwords"></div>
@@ -249,46 +249,6 @@
         </footer>
     </div>
 
-    <script>
-        function generatePasswords() {
-            const length = parseInt(document.getElementById('length').value);
-            const includeUpper = document.getElementById('uppercase').checked;
-            const includeNums = document.getElementById('numbers').checked;
-            const includeSyms = document.getElementById('symbols').checked;
-
-            let chars = 'abcdefghijklmnopqrstuvwxyz';
-            if (includeUpper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            if (includeNums) chars += '0123456789';
-            if (includeSyms) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
-
-            const passwordsDiv = document.getElementById('passwords');
-            passwordsDiv.innerHTML = '';
-
-            for (let i = 0; i < 5; i++) {
-                let password = '';
-                for (let j = 0; j < length; j++) {
-                    password += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                const strength = calculateStrength(password);
-                const pwElement = document.createElement('div');
-                pwElement.className = 'password';
-                pwElement.innerHTML = `${password} <span>Strength: ${strength}</span> <button onclick="copyToClipboard('${password}')">Copy</button>`;
-                passwordsDiv.appendChild(pwElement);
-            }
-        }
-
-        function calculateStrength(pw) {
-            let score = 0;
-            if (pw.length > 12) score++;
-            if (/[A-Z]/.test(pw)) score++;
-            if (/\d/.test(pw)) score++;
-            if (/[^A-Za-z0-9]/.test(pw)) score++;
-            return ['Weak', 'Medium', 'Strong', 'Very Strong'][score];
-        }
-
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
-        }
-    </script>
+    <script>function a(){const b=parseInt(document.getElementById('length').value);const c=document.getElementById('uppercase').checked;const d=document.getElementById('numbers').checked;const e=document.getElementById('symbols').checked;let f='abcdefghijklmnopqrstuvwxyz';if(c)f+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';if(d)f+='0123456789';if(e)f+='!@#$%^&*()_+-=[]{}|;:,.<>?';const g=document.getElementById('passwords');g.innerHTML='';for(let h=0;h<5;h++){let i='';for(let j=0;j<b;j++){i+=f.charAt(Math.floor(Math.random()*f.length))}const k=l(i);const m=document.createElement('div');m.className='password';m.innerHTML=`${i} <span>Strength: ${k}</span> <button onclick="o('${i}')">Copy</button>`;g.appendChild(m)}}function l(n){let p=0;if(n.length>12)p++;if(/[A-Z]/.test(n))p++;if(/\d/.test(n))p++;if(/[^A-Za-z0-9]/.test(n))p++;return['Weak','Medium','Strong','Very Strong'][p]}function o(q){navigator.clipboard.writeText(q).then(()=>alert('Copied to clipboard!'))}</script>
 </body>
 </html>
